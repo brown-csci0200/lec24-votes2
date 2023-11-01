@@ -1,43 +1,3 @@
-x = 5 + 3
-
-x += 10
-
-print(x)
-print(x + 1)
-
-# Variables are in snake_case
-some_string = "string"
-
-# List with 3 things
-option_list = ["red", "green", "blue"]
-print(option_list)
-
-
-# defines a function
-# Note:  in Python:  indentation defines the structure of the code
-# Optionally:  can add "type annotations" to code.  Python may be able to give warnings if you do this
-def some_function(a: int) -> bool: 
-    if a < 5:
-        print("less than 5")
-        print("yay")
-        return True
-    elif a > 10:
-        print("greater than 10")
-        return False
-    else:
-        print("bbooooo")
-        return False
-
-
-
-some_function(2)
-
-# In python, type checking only happens as the code runs
-# We don't notice this is an error until the previous code runs
-#some_function("some string")
-
-# If you have strong feelings about this, take CS173
-
 # How to set up a class
 class PollRecord:
         
@@ -56,26 +16,27 @@ class PollRecord:
         else:
             raise ValueError("Wrong option " + for_option)
         
+    def count_votes(self):
+        return len(self.votes) # Get the length of most Python objects (string, list, dictionary, ...)
+        
     def count_votes_for(self, for_option: str) -> int:
         total = 0
 
         # "for each loop"
-        # for v in self.votes:
-        #     if v == for_option:
-        #         total += 1
-
-        # Loop over array by index
-        # len(x) == size of x (length of array, length of string)
-        for i in range(0, len(self.votes)):
-            v = self.votes[i]  #Look up item in list
+        for v in self.votes:
             if v == for_option:
                 total += 1
 
         return total
+    
+    # Like Java's toString
+    def __str__(self) -> str:
+        return "Poll for question " + self.name + ", choices:  " + str(self.options)
 
 
 option_list = ["red", "green", "blue"]
 p = PollRecord("What is your favorite color?", option_list)
+print(p)
 p.cast_vote("red")
 p.cast_vote("green")
 
